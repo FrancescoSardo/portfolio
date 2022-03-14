@@ -1,0 +1,97 @@
+@import "../../global.scss";
+
+.topbar{
+  background-color: white;
+  transition: all 1s ease;
+  color: $mainColor; 
+  width: 100%;
+  height: 70px;
+  position: fixed; /* imposta l'altezza relativa per i componenti sotto, non viene contato */
+  top: 0;
+  z-index: 3; /*  mantiene visibile durante lo scorrimento la top navbar */
+ 
+  .wrapper{
+    padding: 10px 30px;
+    display: flex ;
+    align-items: center;
+    justify-content: space-between; 
+    .left{
+      display: flex;
+      align-items: center;
+
+      .logo{
+        
+        font-size: 40px;
+        font-weight: 700;
+        text-decoration: none;
+        color: inherit; // eredita il colore 
+        margin-right: 40px;
+      }
+
+      .itemcontainer{
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+        .icon{
+          font-size: 18px;
+          margin-right: 5px;
+        }
+        span{
+          font-size: 15px;
+          font-weight: 400;
+        }
+      }
+    }
+    .right{
+      
+      .hamburger{
+        width: 32px;
+        height: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        span{
+          width: 120%; // DA FIXARE 
+          height: 3px;
+          background-color:  $mainColor;
+          /* il punto da cui fa la rotazione o comunque si trasforma */
+          transform-origin: left;
+          
+          transition: all 2s ease;
+        }
+
+      }
+
+    }
+  }
+  /* se tobar è anche active */
+  &.active{
+    background-color: $mainColor;
+    color: white;
+
+    .hamburger{
+      span {
+        &:first-child{
+          background-color: white;
+          transform: rotate(45deg);
+
+        }
+        &:nth-child(2){
+          opacity: 0;
+        }
+
+        &:last-child{
+          background-color: white;
+          transform: rotate(-45deg);
+        }
+        
+      }
+    }
+  }
+}
+@media only screen and (max-width: 700px) {
+  .topbar{
+    height: 10%;
+  }
+}
