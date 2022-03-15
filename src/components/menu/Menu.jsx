@@ -2,7 +2,6 @@ import React from 'react'
 import "./menu.scss"
 
 export default function Menu( {menuOpen , setMenuOpen}) {
-  console.log(menuOpen)
   return (
     <div className={'menu ' + (menuOpen && 'active')}>
       <ul>

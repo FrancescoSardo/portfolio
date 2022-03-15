@@ -5,7 +5,6 @@ import {Person, Mail} from '@mui/icons-material';
 
 
 export default function Topbar( {menuOpen , setMenuOpen} ) {
-  console.log(menuOpen)
   return (
     <div className={"topbar " +(menuOpen && 'active')}>
       <div className='wrapper'>

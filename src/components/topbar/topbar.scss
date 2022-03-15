@@ -9,7 +9,7 @@
   position: fixed; /* imposta l'altezza relativa per i componenti sotto, non viene contato */
   top: 0;
   z-index: 3; /*  mantiene visibile durante lo scorrimento la top navbar */
- 
+  
   .wrapper{
     padding: 10px 30px;
     display: flex ;
