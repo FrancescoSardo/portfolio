@@ -92,6 +92,32 @@
 }
 @media only screen and (max-width: 700px) {
   .topbar{
-    height: 10%;
+    /* background-color: rgb(110, 133, 201); */
+    height: 50px;
+    .wrapper{
+
+      .left{
+
+        .logo{
+          font-size: 20px;
+        }
+
+        .itemcontainer{
+          display: flex;
+          flex-direction: column;
+          .icon{
+            font-size: 30px;
+          }
+          span{
+            font-size: 0px;
+          }
+        }
+      }
+    }
+
+
+  }
+  &.active{
+    
   }
 }
