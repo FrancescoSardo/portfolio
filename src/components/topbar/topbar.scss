@@ -99,7 +99,7 @@
       .left{
 
         .logo{
-          font-size: 20px;
+          font-size: 15px;
         }
 
         .itemcontainer{
@@ -113,11 +113,19 @@
           }
         }
       }
+
+      .right{
+
+        .hamburger{
+          width: 22px;
+        height: 22px;
+        }
+      }
     }
 
 
   }
   &.active{
-    
+
   }
 }
