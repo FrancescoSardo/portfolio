@@ -10,6 +10,7 @@ import Menu from "./components/menu/Menu";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [workIndex, setWorkindex] = useState(0)
 
   return (
     
@@ -18,8 +19,8 @@ function App() {
         <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
         <div className="sections">
           <Intro />
-          <Portolio />
-          <Works />
+          <Portolio setWorkindex={setWorkindex} />
+          <Works workIndex={workIndex} />
           <Contacs />
         </div>
     </div>

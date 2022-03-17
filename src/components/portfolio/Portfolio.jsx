@@ -4,7 +4,7 @@ import ProgettoTest from "../portfolio/ProgettoTest.jpeg";
 import Portfoliolist from "../PortfolioList/Portfoliolist";
 import { dataAll, dataWebApp, DesktopApp, DataMobile } from "../../data/PostfolioAssets.js";
 
-export default function Portfolio() {
+export default function Portfolio({setWorkindex}) {
   const [selected, setSelected] = useState("All");
   const [data, setData] = useState([]);
 
@@ -22,8 +22,8 @@ export default function Portfolio() {
       case "Desktop":
         setData(DesktopApp);
         break;
-      /* default:
-        setData(dataAll); */
+      default:
+        setData(dataAll);
     }
   }, [selected]);
 
@@ -45,6 +45,12 @@ export default function Portfolio() {
       title: "Desktop",
     },
   ];
+
+  const pressed = () =>{
+    /* setWorkindex(index) */
+    
+  }
+
   return (
     <div className="portfolio" id="portfolio">
       <h1>Portfolio</h1>
@@ -60,13 +66,14 @@ export default function Portfolio() {
       </ul>
       <div className="container">
         {data.map((item) => {
-          /* console.log(item); */
-          console.log(data)
+          /* console.log(data) */
           return (
             <React.Fragment>
-              <div className="item">
+              <div className="item" onClick={()=> {
+                setWorkindex(item.id)
+              }}>
                 <img src={item.img}></img>
-                <h3>{item.title}</h3>
+                <a href="#works">{item.title}</a>
               </div>
             </React.Fragment>
           );

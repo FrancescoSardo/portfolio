@@ -1,3 +1,85 @@
 .works{
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: crimson;
+  position: relative;
+
+  .arrow{
+    height: 50px;
+    position: absolute;
+    transition: prova 1s ease;
+    &.left{
+      left: 100px;
+      transform: rotateY(180deg);
+      cursor: pointer;
+    }
+    &.right{
+      right: 100px;
+      cursor: pointer;
+    }
+
+    &:hover{
+      animation: prova  1s infinite;
+    }
+    @keyframes prova {
+      0%{
+        /* height: 50px; */
+      }
+      50%{
+        /* width: 80px; */
+      }
+      100%{
+        opacity: 0.3;
+        width: 50px;
+      }
+    }
+  }
+
+  .slider{
+    
+    height: 800px;
+    
+    display: flex;
+    position: absolute;
+    left: -100vw;
+    transition: all 1s ease-out;
+
+    .container{
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+  
+      .item{
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background-color: blueviolet;
+        width: 800px;
+        height: 100%;
+        .left{
+          height: 100%;
+          flex: 0.5;
+          background-color: rgb(203, 140, 140);
+
+          .leftcontainer{
+
+          }
+
+
+        }
+  
+        .right{
+          height: 100%;
+          flex: 0.5;
+          background-color: rgb(186, 186, 126);
+        }
+  
+      }
+    }
+  }
+
 }
