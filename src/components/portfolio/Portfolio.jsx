@@ -71,6 +71,7 @@ export default function Portfolio({setWorkindex}) {
             <React.Fragment>
               <div className="item" onClick={()=> {
                 setWorkindex(item.id)
+                console.log("working index " + item.id)
               }}>
                 <img src={item.img}></img>
                 <a href="#works">{item.title}</a>
