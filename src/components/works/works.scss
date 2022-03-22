@@ -62,41 +62,56 @@
         background-color: white;
         width: 800px;
         height: 100%;
+        
         .left{
+          
           height: 100%;
           flex: 0.5;
           /* background-color: rgb(172, 160, 160); */
           /* background-color: white; */
           overflow-y: hidden;
-          .leftcontainer{
-            display: flex;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+            
+            .imgcontainer{
+              height: 100%;
+              width: 100%;
+              display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            padding-top: 80px;
             
-            .imgcontainer{
-              
+
               img{
-                
-                object-fit: fill;
+                max-height: 100%;
+                max-width: 100%;
+                object-fit: cover;              
               }
             }
-            h2{
-
-            }
-            p{
-              
-            }
-          }
+            
+          
 
 
         }
   
         .right{
+          /* margin-top: 10px; */
+          
+          margin-left: 20px;
           height: 100%;
           flex: 0.5;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           /* background-color: white; */
+          h2{
+           
+          }
+          p{
+            
+          }
         }
   
       }

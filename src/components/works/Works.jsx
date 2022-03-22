@@ -55,12 +55,12 @@ export default function Works({workIndex}) {
           <div className="container">
           <div className="item" id="word_id" >
             <div className="left" >
-              <div className="leftcontainer">
+              
                 <div className="imgcontainer">
                   <img src={d.img}></img>
                 </div>
                 
-              </div>
+              
             </div>
             <div className="right">
             <h2>{d.title}</h2>
