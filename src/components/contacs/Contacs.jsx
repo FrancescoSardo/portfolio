@@ -4,36 +4,25 @@ import imge from "../../assets/shake.svg"
 
 
 export default function Contacs() {
-  /* const nodemailer = nodemailer
 
-  let trasporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "casellaindesiderata@gmail.com",
-      pass: "Spam2019"
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  })
-  let mailOptions = {
-    from: "casellaindesiderata@gmail.com",
-    to: "francescosardo91@gmail.com",
-    subject: "Ciao",
-    text: "provamail"
-  }
-  trasporter.sendMail(mailOptions, function(err, succes){
-    if(err){
-      console.log("errore")
-    }else{
-      console.log("mail invita")
-    }
-  }) */
-  
+
+
   return (
     <div className='contacs' id='contacs'>
       <div className="left">
-        <img src={imge} alt="" />
+        <div className="imagewrapper"   style={{ 
+      backgroundImage: `url(${imge})` ,
+      /* opacity: 0.3 */
+    }} >
+        {/* <img src={imge} alt="" /> */}
+        <div className='info' >
+          <h2>Insta</h2>
+          <h2>facebook</h2>
+          <h2>Discord</h2>
+        </div>
+        </div>
+        
+       
       </div>
       <div className="right">
         <h2>Contacs</h2>

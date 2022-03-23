@@ -2,11 +2,14 @@
 
 .portfolio{
   background-color: white;
+  box-shadow: 0 0 50px #ccc;
   display: flex;
   flex-direction: column;
   align-items: center;
   
   h1{
+    overflow-y: hidden;
+    margin-top: 15px;
     font-size: 50px;
   }
   ul{

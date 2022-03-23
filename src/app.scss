@@ -3,6 +3,9 @@
 
   .sections{
     /* background-color: red; */
+
+    
+    
     width: 100%;
     height:calc(100vh - 70px) ;
     position: relative;
@@ -11,6 +14,10 @@
     
     scroll-snap-type: y mandatory;
     scrollbar-width: none;
+
+
+ 
+
     &::-webkit-scrollbar{
       display: none;
       /* nascondere la bassa di scorrimento laterale */
@@ -19,7 +26,7 @@
       width: 100vw;
       height:calc(100vh - 70px) ;
       scroll-snap-align: start; /* scroll */
-
+      
     }
   }
 }

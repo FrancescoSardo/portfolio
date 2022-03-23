@@ -19,7 +19,7 @@ function App() {
         <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
         <div className="sections">
           <Intro />
-          <Portolio setWorkindex={setWorkindex} />
+          <Portolio setWorkindex={setWorkindex} className="prova" />
           <Works workIndex={workIndex} />
           <Contacs />
         </div>
