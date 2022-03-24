@@ -11,17 +11,14 @@ export default function Contacs() {
     <div className='contacs' id='contacs'>
       <div className="left">
         <div className="imagewrapper"   style={{ 
-      backgroundImage: `url(${imge})` ,
-      /* opacity: 0.3 */
-    }} >
-        {/* <img src={imge} alt="" /> */}
+          backgroundImage: `url(${imge})`
+        }} ></div>
+
         <div className='info' >
-          <h2>Insta</h2>
-          <h2>facebook</h2>
-          <h2>Discord</h2>
+            <h2>Insta</h2>
+            <h2>facebook</h2>
+            <h2>Discord</h2>
         </div>
-        </div>
-        
        
       </div>
       <div className="right">

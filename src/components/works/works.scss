@@ -141,3 +141,39 @@
       background-position: 0% 50%;
   }
 }
+
+@media only screen and (max-width: 700px){
+  .works{
+    
+    
+    .arrow{
+      height: 50px;
+      bottom: 10px;
+      position: absolute;
+      transition: prova 1s ease;
+      &.left{
+        left: 100px;
+        transform: rotateY(180deg);
+        cursor: pointer;
+      }
+      &.right{
+        right: 100px;
+        cursor: pointer;
+      }
+  }
+
+  .slider{
+    
+    
+    .container{
+      
+      
+      .item{
+        
+        width: 200px;
+        height: 100%;
+      }
+    }
+  }
+ }
+}
