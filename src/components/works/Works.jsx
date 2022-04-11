@@ -58,6 +58,11 @@ export default function Works({workIndex}) {
               
                 <div className="imgcontainer">
                   <img src={d.img}></img>
+                  
+                  <img src={d.img2}></img>
+                  <img src={d.img3}></img>
+                  <img src={d.img3}></img>
+                  
                 </div>
                 
               
