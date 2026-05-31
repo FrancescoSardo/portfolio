@@ -72,6 +72,11 @@ export function CaseStudyLayout({
           ))}
         </div>
 
+        {/* Content */}
+        <div className="flex flex-col gap-10 text-sm text-zinc-400 font-mono leading-relaxed">
+          {children}
+        </div>
+
         {/* Screenshots / Figures */}
         {images && images.length > 0 && (
           <div className="flex flex-col gap-6">
@@ -96,11 +101,6 @@ export function CaseStudyLayout({
             ))}
           </div>
         )}
-
-        {/* Content */}
-        <div className="flex flex-col gap-10 text-sm text-zinc-400 font-mono leading-relaxed">
-          {children}
-        </div>
       </div>
     </div>
   );
