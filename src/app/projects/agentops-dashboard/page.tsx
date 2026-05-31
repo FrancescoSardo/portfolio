@@ -29,6 +29,16 @@ const IMAGES = [
     alt: "AgentOps Dashboard — tooling page",
     caption: "Tooling page — all installed tools across Homebrew, npm, pip, Cargo, and more",
   },
+  {
+    src: "/img/agent-kg.png",
+    alt: "AgentOps Dashboard — knowledge graph",
+    caption: "Knowledge Graph — visual representation of agent memory and cross-references",
+  },
+  {
+    src: "/img/agent-token.png",
+    alt: "AgentOps Dashboard — token usage",
+    caption: "Token usage — real-time monitoring across models and providers",
+  },
 ];
 
 export default function AgentOpsDashboardPage() {
