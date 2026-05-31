@@ -1,0 +1,292 @@
+{
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/postcss.config.mjs": {
+    "mtime": 1780227604.1913207,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/package.json": {
+    "mtime": 1780227640.5442414,
+    "ast_hash": "5720a8fec4b705d5ebf355ab92cd71b7",
+    "semantic_hash": "5720a8fec4b705d5ebf355ab92cd71b7"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/tsconfig.json": {
+    "mtime": 1780227604.1928942,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/eslint.config.mjs": {
+    "mtime": 1780227604.1913252,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": "dfa1f5f6a7037bf39dc510f30b180002"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/next.config.ts": {
+    "mtime": 1780227604.19207,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/types/index.ts": {
+    "mtime": 1780231261.7951167,
+    "ast_hash": "0e388e00b3f9641e1c65529d471e2ae6",
+    "semantic_hash": "0e388e00b3f9641e1c65529d471e2ae6"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/layout.tsx": {
+    "mtime": 1780227975.3320749,
+    "ast_hash": "d9e4573258094f64b5cb2aac52d672f9",
+    "semantic_hash": "d9e4573258094f64b5cb2aac52d672f9"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/page.tsx": {
+    "mtime": 1780227980.2666724,
+    "ast_hash": "dd4d56d29de22c2728573bbf532c8aa5",
+    "semantic_hash": "dd4d56d29de22c2728573bbf532c8aa5"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/projects/layout.tsx": {
+    "mtime": 1780227984.5079107,
+    "ast_hash": "2b02d05ada14e9676efded7fa4be3d7a",
+    "semantic_hash": "2b02d05ada14e9676efded7fa4be3d7a"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/projects/cwl-editor/page.tsx": {
+    "mtime": 1780233158.639854,
+    "ast_hash": "0e71a23a7d139bdf3d312ea3cc95a224",
+    "semantic_hash": "0e71a23a7d139bdf3d312ea3cc95a224"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/projects/bloomticket/page.tsx": {
+    "mtime": 1780228829.687573,
+    "ast_hash": "2be8256ab6ef3014503f570d8a410be5",
+    "semantic_hash": "2be8256ab6ef3014503f570d8a410be5"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/app/projects/agentops-dashboard/page.tsx": {
+    "mtime": 1780231332.1602209,
+    "ast_hash": "51cb1f6609550b28a4e261ba6eb800ec",
+    "semantic_hash": "51cb1f6609550b28a4e261ba6eb800ec"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/TechBadge.tsx": {
+    "mtime": 1780227707.6682649,
+    "ast_hash": "476cbc07ef55a3c7e72f384749713c00",
+    "semantic_hash": "476cbc07ef55a3c7e72f384749713c00"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/StatCard.tsx": {
+    "mtime": 1780227733.4857042,
+    "ast_hash": "7c585a1b9424beebb85095dac5cd4220",
+    "semantic_hash": "7c585a1b9424beebb85095dac5cd4220"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/TerminalWindow.tsx": {
+    "mtime": 1780227736.7326984,
+    "ast_hash": "2f3f39544d6ed632156ac602dff80919",
+    "semantic_hash": "2f3f39544d6ed632156ac602dff80919"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/StatusDot.tsx": {
+    "mtime": 1780231290.1563873,
+    "ast_hash": "8bbb273cbbc68a13386386e3d3cc52db",
+    "semantic_hash": "8bbb273cbbc68a13386386e3d3cc52db"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/SectionLabel.tsx": {
+    "mtime": 1780227705.061839,
+    "ast_hash": "3629027d09bc9ff195c35520e606f4d7",
+    "semantic_hash": "3629027d09bc9ff195c35520e606f4d7"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/Button.tsx": {
+    "mtime": 1780227714.4087584,
+    "ast_hash": "e840e37e2a10efa45213155aca4f7730",
+    "semantic_hash": "e840e37e2a10efa45213155aca4f7730"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/ui/TypewriterText.tsx": {
+    "mtime": 1780227725.2562501,
+    "ast_hash": "39037c5a3af71299d8fb02f21130f2e3",
+    "semantic_hash": "39037c5a3af71299d8fb02f21130f2e3"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Projects.tsx": {
+    "mtime": 1780227818.6041045,
+    "ast_hash": "fd315aefb9b448ef49d748c91ba0a2f2",
+    "semantic_hash": "fd315aefb9b448ef49d748c91ba0a2f2"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Hero.tsx": {
+    "mtime": 1780232808.228096,
+    "ast_hash": "212adbf6fc510487a5a4f8ec1d64fd50",
+    "semantic_hash": "212adbf6fc510487a5a4f8ec1d64fd50"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Experience.tsx": {
+    "mtime": 1780227804.4689176,
+    "ast_hash": "43053b2a91841fe4f4337c4a0b9d912c",
+    "semantic_hash": "43053b2a91841fe4f4337c4a0b9d912c"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/AILab.tsx": {
+    "mtime": 1780231829.955696,
+    "ast_hash": "72b59026c4f70014a526a87295600f22",
+    "semantic_hash": "72b59026c4f70014a526a87295600f22"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Contact.tsx": {
+    "mtime": 1780232871.449355,
+    "ast_hash": "3c64af25e5826321288d983f4ce8657f",
+    "semantic_hash": "3c64af25e5826321288d983f4ce8657f"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Education.tsx": {
+    "mtime": 1780232424.8265033,
+    "ast_hash": "f2dadd1af3e0af0c5d1d1cdc57809c48",
+    "semantic_hash": "f2dadd1af3e0af0c5d1d1cdc57809c48"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/About.tsx": {
+    "mtime": 1780227792.0008013,
+    "ast_hash": "cbbb9de3b540bce6e30d93b4ed5328ec",
+    "semantic_hash": "cbbb9de3b540bce6e30d93b4ed5328ec"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/sections/Certifications.tsx": {
+    "mtime": 1780232736.3362238,
+    "ast_hash": "0566a9530e791bbe4111e3f93152d813",
+    "semantic_hash": "0566a9530e791bbe4111e3f93152d813"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/layout/Navbar.tsx": {
+    "mtime": 1780227748.0718632,
+    "ast_hash": "64f85171d88296e219e104d5d7bfc301",
+    "semantic_hash": "64f85171d88296e219e104d5d7bfc301"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/layout/Footer.tsx": {
+    "mtime": 1780232808.7071414,
+    "ast_hash": "0d858778537bc46d7b1974379b1c7be0",
+    "semantic_hash": "0d858778537bc46d7b1974379b1c7be0"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/projects/CaseStudyLayout.tsx": {
+    "mtime": 1780228809.336133,
+    "ast_hash": "6c19129321eaa5ebac8c0968bd87a966",
+    "semantic_hash": "6c19129321eaa5ebac8c0968bd87a966"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/components/projects/ProjectCard.tsx": {
+    "mtime": 1780227811.7072146,
+    "ast_hash": "efc2566dd78f1a5e545edc32cb85793f",
+    "semantic_hash": "efc2566dd78f1a5e545edc32cb85793f"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/lib/projects.ts": {
+    "mtime": 1780231268.2681887,
+    "ast_hash": "d4f06e1665b2c1fbaeea44cf484e91e0",
+    "semantic_hash": "d4f06e1665b2c1fbaeea44cf484e91e0"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/lib/utils.ts": {
+    "mtime": 1780227664.5685387,
+    "ast_hash": "d9837f38cc05303254571985e3164050",
+    "semantic_hash": "d9837f38cc05303254571985e3164050"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/lib/motion.ts": {
+    "mtime": 1780227668.6081324,
+    "ast_hash": "0f6b6e67389ebb83a039da820ced1a24",
+    "semantic_hash": "0f6b6e67389ebb83a039da820ced1a24"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/src/lib/experience.ts": {
+    "mtime": 1780227690.8540707,
+    "ast_hash": "03f576619b10632279edbc4b2fab44e4",
+    "semantic_hash": "03f576619b10632279edbc4b2fab44e4"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/README.md": {
+    "mtime": 1780227604.1911006,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": "f15aaa42d5d299d091b1171097ea56ad"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/AGENTS.md": {
+    "mtime": 1780227626.507137,
+    "ast_hash": "9e09241799026ac05be315a2f0b50055",
+    "semantic_hash": "9e09241799026ac05be315a2f0b50055"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/CLAUDE.md": {
+    "mtime": 1780227626.5071998,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": "5c27369b226fcf2be8a6cfe52224e767"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/pdf/Francesco_sardo_CV.pdf": {
+    "mtime": 1780232290.2968833,
+    "ast_hash": "58b445a00c642e91f4d17e58648cff29",
+    "semantic_hash": "58b445a00c642e91f4d17e58648cff29"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/agent-dash1.png": {
+    "mtime": 1780231201.500489,
+    "ast_hash": "86c86a1421c7ed6353e148d758d93f3b",
+    "semantic_hash": "86c86a1421c7ed6353e148d758d93f3b"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/agent-dash2.png": {
+    "mtime": 1780231192.3665888,
+    "ast_hash": "016284cc9bf762f46b053e9ca5d42ad6",
+    "semantic_hash": "016284cc9bf762f46b053e9ca5d42ad6"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/agent-dash3.png": {
+    "mtime": 1780231184.770572,
+    "ast_hash": "cf0c0561fb39fc2876ab1387961c5a6b",
+    "semantic_hash": "cf0c0561fb39fc2876ab1387961c5a6b"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/fig3_2_layout_ui.png": {
+    "mtime": 1774770276.0,
+    "ast_hash": "0f1898484804f477bdb0d5f697875316",
+    "semantic_hash": "0f1898484804f477bdb0d5f697875316"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/fig4_1_cwlnode_anatomy.png": {
+    "mtime": 1774770276.0,
+    "ast_hash": "a630175a728c12857ac4d8542adf6f98",
+    "semantic_hash": "a630175a728c12857ac4d8542adf6f98"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/iPhone 14-15 Pro Max 6.7 - Home.png": {
+    "mtime": 1759782194.3361814,
+    "ast_hash": "5ed8a876941ac13e49e056089307a964",
+    "semantic_hash": "5ed8a876941ac13e49e056089307a964"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/img/fig1_1_overview_sistemae.png": {
+    "mtime": 1774770276.0,
+    "ast_hash": "72913147d23779af884e87114298de78",
+    "semantic_hash": "72913147d23779af884e87114298de78"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/file.svg": {
+    "mtime": 1780227604.1910417,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/vercel.svg": {
+    "mtime": 1780227604.1922646,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/next.svg": {
+    "mtime": 1780227604.192256,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/globe.svg": {
+    "mtime": 1780227604.1923027,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/window.svg": {
+    "mtime": 1780227604.192343,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/cwl-editor-layout.png": {
+    "mtime": 1780228833.8598833,
+    "ast_hash": "0f1898484804f477bdb0d5f697875316",
+    "semantic_hash": "0f1898484804f477bdb0d5f697875316"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/agent-dash1.png": {
+    "mtime": 1780231250.107758,
+    "ast_hash": "86c86a1421c7ed6353e148d758d93f3b",
+    "semantic_hash": "86c86a1421c7ed6353e148d758d93f3b"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/agent-dash2.png": {
+    "mtime": 1780231250.1142967,
+    "ast_hash": "016284cc9bf762f46b053e9ca5d42ad6",
+    "semantic_hash": "016284cc9bf762f46b053e9ca5d42ad6"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/agent-dash3.png": {
+    "mtime": 1780231250.1186483,
+    "ast_hash": "cf0c0561fb39fc2876ab1387961c5a6b",
+    "semantic_hash": "cf0c0561fb39fc2876ab1387961c5a6b"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/cwl-system-overview.png": {
+    "mtime": 1780228833.8588924,
+    "ast_hash": "72913147d23779af884e87114298de78",
+    "semantic_hash": "72913147d23779af884e87114298de78"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/iPhone 14-15 Pro Max 6.7 - Home.png": {
+    "mtime": 1780228833.862091,
+    "ast_hash": "5ed8a876941ac13e49e056089307a964",
+    "semantic_hash": "5ed8a876941ac13e49e056089307a964"
+  },
+  "/Users/francescosardo/Desktop/progetti/Lavoro/portfolio-wb/public/img/cwl-node-anatomy.png": {
+    "mtime": 1780228833.8608685,
+    "ast_hash": "a630175a728c12857ac4d8542adf6f98",
+    "semantic_hash": "a630175a728c12857ac4d8542adf6f98"
+  }
+}

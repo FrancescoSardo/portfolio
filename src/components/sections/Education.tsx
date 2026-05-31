@@ -37,9 +37,14 @@ export function Education() {
                 <div className="font-mono text-xs text-zinc-500 mt-0.5">
                   AI & Advanced Software Architectures
                 </div>
-                <div className="font-mono text-xs text-zinc-600 mt-0.5">
-                  Università degli Studi di Torino
-                </div>
+                <a
+                  href="https://laurea.informatica.unito.it/do/home.pl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors mt-0.5 block"
+                >
+                  University of Turin ↗
+                </a>
               </div>
               <span className="font-mono text-2xl font-semibold text-amber-400 shrink-0">98/110</span>
             </div>
@@ -88,9 +93,14 @@ export function Education() {
                 <div className="font-mono text-xs text-zinc-500 mt-0.5">
                   Computer Science
                 </div>
-                <div className="font-mono text-xs text-zinc-600 mt-0.5">
-                  Università degli Studi di Torino
-                </div>
+                <a
+                  href="https://laurea.informatica.unito.it/do/home.pl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors mt-0.5 block"
+                >
+                  University of Turin ↗
+                </a>
               </div>
               <span className="font-mono text-2xl font-semibold text-amber-400 shrink-0">99/110</span>
             </div>

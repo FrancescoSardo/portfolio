@@ -59,7 +59,7 @@ export function Hero() {
               [View Projects]
             </a>
             <a
-              href="/cv-francesco-sardo.pdf"
+              href="/pdf/Francesco_sardo_CV.pdf"
               download
               className="font-mono text-xs border border-zinc-700 text-zinc-400 px-4 py-2 hover:border-zinc-500 hover:text-zinc-200 transition-colors duration-200"
             >
@@ -74,7 +74,7 @@ export function Hero() {
               GitHub ↗
             </a>
             <a
-              href="https://linkedin.com/in/francescosardo"
+              href="https://www.linkedin.com/in/francescosardo-devops"
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-xs border border-zinc-700 text-zinc-400 px-4 py-2 hover:border-zinc-500 hover:text-zinc-200 transition-colors duration-200"

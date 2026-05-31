@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="border-t border-zinc-900 py-8 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <span className="font-mono text-xs text-zinc-600">
-          © 2026 Francesco Sardo · it@bloomticket.com
+          © 2026 Francesco Sardo · francescosardo91@gmail.com
         </span>
         <div className="flex gap-6">
           <a
@@ -15,7 +15,7 @@ export function Footer() {
             GitHub ↗
           </a>
           <a
-            href="https://linkedin.com/in/francescosardo"
+            href="https://www.linkedin.com/in/francescosardo-devops"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors"

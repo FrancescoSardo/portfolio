@@ -8,14 +8,14 @@ const CERTS = [
   {
     title: "Building with the Claude API",
     issuer: "Anthropic",
-    year: "2025",
-    href: undefined,
+    year: "2026",
+    href: "https://anthropic.skilljar.com/claude-with-the-anthropic-api",
   },
   {
     title: "Claude in Action",
     issuer: "Anthropic",
-    year: "2025",
-    href: undefined,
+    year: "2026",
+    href: "https://anthropic.skilljar.com/claude-code-in-action",
   },
 ];
 
@@ -51,7 +51,7 @@ export function Certifications() {
                   rel="noopener noreferrer"
                   className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors"
                 >
-                  Verify ↗
+                  Course ↗
                 </a>
               )}
             </motion.div>

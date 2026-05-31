@@ -15,19 +15,19 @@ const METRICS = [
 
 const IMAGES = [
   {
-    src: "/img/fig1_1_overview_sistemae.png",
+    src: "/img/cwl-system-overview.png",
     alt: "CWL Visual Editor — System Overview",
-    caption: "Fig 1.1 — System overview: YAML import, visual editing, and export pipeline",
+    caption: "System overview: YAML import, visual editing, and export pipeline",
   },
   {
-    src: "/img/fig3_2_layout_ui.png",
+    src: "/img/cwl-editor-layout.png",
     alt: "CWL Visual Editor — UI Layout",
-    caption: "Fig 3.2 — Editor UI layout: canvas, sidebar, and toolbar",
+    caption: "Editor UI layout: canvas, sidebar, and toolbar",
   },
   {
-    src: "/img/fig4_1_cwlnode_anatomy.png",
+    src: "/img/cwl-node-anatomy.png",
     alt: "CWL Visual Editor — CWL Node Anatomy",
-    caption: "Fig 4.1 — CWL node anatomy: ports, types, and edge validation",
+    caption: "CWL node anatomy: ports, types, and edge validation",
   },
 ];
 

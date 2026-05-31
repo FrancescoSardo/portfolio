@@ -4,9 +4,9 @@ import { useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const CONTACT_LINES = [
-  { key: "email", value: "it@bloomticket.com", href: "mailto:it@bloomticket.com", copyable: true },
+  { key: "email", value: "francescosardo91@gmail.com", href: "mailto:francescosardo91@gmail.com", copyable: true },
   { key: "github", value: "github.com/FrancescoSardo", href: "https://github.com/FrancescoSardo", copyable: false },
-  { key: "linkedin", value: "linkedin.com/in/francescosardo", href: "https://linkedin.com/in/francescosardo", copyable: false },
+  { key: "linkedin", value: "linkedin.com/in/francescosardo-devops", href: "https://linkedin.com/in/francescosardo-devops", copyable: false },
   { key: "location", value: "Italy → relocation ready", href: null, copyable: false },
 ];
 
@@ -48,7 +48,8 @@ export function Contact() {
             {CONTACT_LINES.map(({ key, value, href, copyable }) => {
               const inner = (
                 <div className="flex gap-3 items-center group">
-                  <span className="text-amber-400 text-xs w-16 shrink-0">&gt; {key}</span>
+                  <span className="text-zinc-600 text-xs shrink-0">&gt;</span>
+                  <span className="text-amber-400 text-xs w-16 shrink-0">{key}</span>
                   <span
                     className={`text-xs text-zinc-300 ${
                       (href || copyable) ? "hover:text-amber-400 cursor-pointer transition-colors" : ""
