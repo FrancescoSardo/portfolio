@@ -45,6 +45,13 @@ const PIPELINES: Pipeline[] = [
     status: "active",
   },
   {
+    name: "Worker Delegation (gemini-workers)",
+    flow: ["route-task", "gemini-worker", "capped-report", "synthesize"],
+    language: "Bash + Subagents",
+    llm: "Claude + Gemini",
+    status: "active",
+  },
+  {
     name: "CV Variant Generator",
     flow: ["profile-md", "claude-prompt", "cv-output"],
     language: "Python",
@@ -81,6 +88,12 @@ const MAIN_TOOLS: MainTool[] = [
     description: "Local read-only dashboard for Claude Code internals — 12 data domains: config, skills, memory, tokens, agents, commands, tooling.",
     tag: "observability",
     color: "text-orange-300",
+  },
+  {
+    name: "gemini-workers",
+    description: "Claude Code orchestrates 4 read-only Gemini CLI workers (research, architect, reviewer, longcontext). Capped outputs, model fallback, JSONL observability.",
+    tag: "multi-agent",
+    color: "text-emerald-400",
   },
   {
     name: "cli-printing-press",

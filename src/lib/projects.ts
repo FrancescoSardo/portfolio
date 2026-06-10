@@ -44,6 +44,19 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "gemini-workers",
+    number: "05",
+    title: "GEMINI WORKERS",
+    status: "private",
+    statusLabel: "● PRIVATE — Daily Driver",
+    hook: "Multi-agent orchestration system where Claude Code delegates research, architecture review, code review, and 1M-token analysis to a pool of four read-only Gemini CLI workers with hard-capped outputs.",
+    techStack: ["Bash", "Claude Code", "Gemini CLI", "Python", "JSONL"],
+    metrics: "4 Workers · 54/54 Tests · Read-only Execution · Model Fallback Chain",
+    links: {
+      caseStudy: "/projects/gemini-workers",
+    },
+  },
+  {
     slug: "cwl-editor",
     number: "02",
     title: "CWL VISUAL EDITOR",
