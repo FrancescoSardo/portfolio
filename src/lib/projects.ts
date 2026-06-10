@@ -30,6 +30,20 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "claude-code-router",
+    number: "04",
+    title: "CLAUDE CODE ROUTER",
+    status: "contribution",
+    statusLabel: "● OSS CONTRIBUTION — Merged",
+    hook: "Open-source contribution to claude-code-router — added Gemini CLI provider support via a new transformer, persistent process pool, and a provider health-check UI with live test button.",
+    techStack: ["TypeScript", "Fastify", "React", "Vite", "Node.js", "NDJSON"],
+    metrics: "1 transformer · 1 process manager · 1 API route · cli:// URL scheme",
+    links: {
+      caseStudy: "/projects/claude-code-router",
+      github: "https://github.com/musistudio/claude-code-router",
+    },
+  },
+  {
     slug: "cwl-editor",
     number: "02",
     title: "CWL VISUAL EDITOR",

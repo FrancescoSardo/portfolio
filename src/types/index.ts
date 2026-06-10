@@ -2,7 +2,7 @@ export interface Project {
   slug: string;
   number: string;
   title: string;
-  status: "live" | "thesis" | "experimental" | "private";
+  status: "live" | "thesis" | "experimental" | "private" | "contribution";
   statusLabel: string;
   hook: string;
   techStack: string[];

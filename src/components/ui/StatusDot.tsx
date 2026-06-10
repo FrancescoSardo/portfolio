@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type StatusType = "live" | "thesis" | "experimental" | "open" | "private";
+type StatusType = "live" | "thesis" | "experimental" | "open" | "private" | "contribution";
 
 interface StatusDotProps {
   status: StatusType;
@@ -14,6 +14,7 @@ const colorMap: Record<StatusType, string> = {
   experimental: "text-orange-400 border-orange-400/30",
   open: "text-green-400 border-green-400/30",
   private: "text-amber-400 border-amber-400/30",
+  contribution: "text-emerald-400 border-emerald-400/30",
 };
 
 export function StatusDot({ status, label, className }: StatusDotProps) {
