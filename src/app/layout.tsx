@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -36,7 +37,10 @@ export default function RootLayout({
       lang="en"
       className={`${jetbrainsMono.variable} ${inter.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-black text-zinc-100">{children}</body>
+      <body className="min-h-full flex flex-col bg-black text-zinc-100">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
