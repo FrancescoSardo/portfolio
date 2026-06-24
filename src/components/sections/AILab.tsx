@@ -8,11 +8,11 @@ import type { Pipeline, ModelEntry } from "@/types";
 
 const TOOL_FEED = [
   { time: "09:14", tool: "claude-code", task: "refactoring session", project: "bloomticket-api" },
-  { time: "09:47", tool: "gemini-cli", task: "summarize PR diff", project: "3 files" },
+  { time: "09:47", tool: "agy-cli", task: "cross-session context loaded", project: "claude-mem injection" },
   { time: "10:12", tool: "claude-code", task: "scaffold component", project: "cwl-editor" },
   { time: "11:03", tool: "graphify", task: "knowledge graph query", project: "claude-obsidian" },
-  { time: "11:30", tool: "lm-studio", task: "local model test", project: "ccr routing" },
-  { time: "13:22", tool: "gemini-cli", task: "research K8s ingress patterns", project: "devops" },
+  { time: "11:30", tool: "agy-cli", task: "architecture review via CCR", project: "ccr routing" },
+  { time: "13:22", tool: "claude-code", task: "research K8s ingress patterns", project: "devops" },
   { time: "14:10", tool: "claude-code", task: "TDD session", project: "bloomticket-mobile" },
   { time: "15:45", tool: "obsidian-sync", task: "wiki ingest + save", project: "claude-obsidian" },
   { time: "16:20", tool: "agentops", task: "inspect memory + tokens", project: "agentops-dashboard" },
@@ -20,6 +20,7 @@ const TOOL_FEED = [
 
 const TOOL_COLORS: Record<string, string> = {
   "claude-code": "text-amber-400",
+  "agy-cli": "text-emerald-400",
   "gemini-cli": "text-blue-400",
   "python-script": "text-green-400",
   "lm-studio": "text-purple-400",
@@ -42,6 +43,13 @@ const PIPELINES: Pipeline[] = [
     flow: ["source-ingest", "wiki-save", "graphify-index"],
     language: "MCP Plugin",
     llm: "Claude + Gemini",
+    status: "active",
+  },
+  {
+    name: "AGY Cross-Session Memory",
+    flow: ["agy-session", "mem-inject", "observe", "persist-db"],
+    language: "Python Hook",
+    llm: "AGY CLI + claude-mem",
     status: "active",
   },
   {
@@ -90,10 +98,16 @@ const MAIN_TOOLS: MainTool[] = [
     color: "text-orange-300",
   },
   {
+    name: "antigravity-cli",
+    description: "Google's Antigravity (AGY) CLI integrated as a CCR provider (cli://agy). claude-mem hook injects 50 cross-session observations into every new AGY conversation via PreInvocation lifecycle.",
+    tag: "local-llm · memory",
+    color: "text-emerald-400",
+  },
+  {
     name: "gemini-workers",
     description: "Claude Code orchestrates 4 read-only Gemini CLI workers (research, architect, reviewer, longcontext). Capped outputs, model fallback, JSONL observability.",
     tag: "multi-agent",
-    color: "text-emerald-400",
+    color: "text-teal-400",
   },
   {
     name: "cli-printing-press",
@@ -118,6 +132,7 @@ const MAIN_TOOLS: MainTool[] = [
 
 const MODELS: ModelEntry[] = [
   { model: "claude-sonnet", provider: "Anthropic", use: "code + agent orchestration" },
+  { model: "agy (antigravity)", provider: "Google", use: "CCR provider · cross-session memory" },
   { model: "gemini-flash", provider: "Google", use: "research + summarization" },
   { model: "[latest local]", provider: "LM Studio", use: "CCR / claude-mem testing" },
   { model: "[frontier]", provider: "OpenRouter", use: "heavy inference / exploration" },
@@ -219,16 +234,23 @@ export function AILab() {
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs text-amber-400 w-28">claude-code</span>
                   <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-full w-[70%] bg-amber-400 rounded-full" />
+                    <div className="h-full w-[65%] bg-amber-400 rounded-full" />
                   </div>
-                  <span className="font-mono text-xs text-zinc-600">70%</span>
+                  <span className="font-mono text-xs text-zinc-600">65%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-emerald-400 w-28">agy-cli</span>
+                  <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
+                    <div className="h-full w-[20%] bg-emerald-400 rounded-full" />
+                  </div>
+                  <span className="font-mono text-xs text-zinc-600">20%</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs text-blue-400 w-28">gemini-cli</span>
                   <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
-                    <div className="h-full w-[30%] bg-blue-400 rounded-full" />
+                    <div className="h-full w-[15%] bg-blue-400 rounded-full" />
                   </div>
-                  <span className="font-mono text-xs text-zinc-600">30%</span>
+                  <span className="font-mono text-xs text-zinc-600">15%</span>
                 </div>
               </div>
             </TerminalWindow>
