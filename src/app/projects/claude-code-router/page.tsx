@@ -3,24 +3,24 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Claude Code Router — Francesco Sardo",
-  description: "OSS contribution: Gemini CLI provider support for claude-code-router — transformer, process pool, and provider test UI",
+  description: "OSS contribution + personal extension: AGY CLI provider for claude-code-router — transformer, subprocess runner, SSE streaming, and session continuity",
 };
 
 const METRICS = [
-  { value: "GeminiCLI", label: "New Transformer" },
+  { value: "AGY CLI", label: "New Transformer" },
   { value: "cli://", label: "URL Scheme" },
-  { value: "Process Pool", label: "Persistent Spawn" },
-  { value: "Test UI", label: "Provider Health Check" },
+  { value: "SSE Stream", label: "Real-time Output" },
+  { value: "Session Map", label: "Conversation Continuity" },
 ];
 
 export default function ClaudeCodeRouterPage() {
   return (
     <CaseStudyLayout
       title="Claude Code Router"
-      statusLabel="● OSS CONTRIBUTION — Merged"
+      statusLabel="● OSS CONTRIBUTION — Active"
       statusColor="text-emerald-400 border-emerald-400/30"
-      tagline="Open-source contribution to claude-code-router — added Gemini CLI as a local, API-key-free provider. Built a new transformer, a persistent process pool, and a live provider test button in the management UI."
-      techStack={["TypeScript", "Fastify", "React", "Vite", "Node.js", "NDJSON"]}
+      tagline="Open-source contribution to claude-code-router — extended the cli:// provider system to support Antigravity (AGY) CLI as a local, API-key-free backend. Built a new transformer, subprocess runner with SSE streaming, and cross-session conversation continuity."
+      techStack={["TypeScript", "Fastify", "Node.js", "SSE", "NDJSON", "SQLite"]}
       metrics={METRICS}
       images={[]}
     >
@@ -29,10 +29,11 @@ export default function ClaudeCodeRouterPage() {
         <p>
           claude-code-router is an open-source proxy that intercepts{" "}
           <code className="text-amber-400 text-xs">ANTHROPIC_BASE_URL</code> and routes Claude Code
-          requests to alternative LLM backends. The existing system supported HTTP providers
-          (OpenRouter, LM Studio) but had no way to use local CLI-based models — meaning free-tier
-          Gemini via the <code className="text-amber-400 text-xs">gemini</code> CLI binary was
-          inaccessible.
+          requests to alternative LLM backends. The existing{" "}
+          <code className="text-amber-400 text-xs">cli://</code> URL scheme supported spawning local
+          CLI tools as providers. I extended this to integrate{" "}
+          <code className="text-amber-400 text-xs">agy</code> — the Antigravity CLI — as a fully
+          functional provider with streaming output and persistent sessions.
         </p>
       </section>
 
@@ -41,20 +42,20 @@ export default function ClaudeCodeRouterPage() {
         <div className="flex flex-col gap-3">
           {[
             [
-              "GeminiCLITransformer",
-              "New transformer that parses the Gemini CLI's NDJSON stream format — init / message / result events. Extracts assistant text, aggregates token usage across models, captures session IDs, and surfaces errors cleanly. Handles logs or stats that appear before the JSON response block.",
+              "AgyCLITransformer",
+              "New transformer that adapts AGY CLI output to Anthropic's message format. Handles both SSE streaming (text_delta events) and non-streaming paths. Strips the MEMORY INJECTED header block that AGY prepends to every response — split on the ━━━ delimiter, discarding the first two segments so only assistant text reaches Claude Code.",
             ],
             [
-              "GeminiCLIProcessManager",
-              "Persistent process pool that spawns and reuses gemini child processes across requests. Pipes prompts via stdin, reads stdout as NDJSON, manages per-session cache. Avoids cold-start latency on every message by keeping processes alive.",
+              "runAgyCLI subprocess runner",
+              "Spawns agy as a child process per request, pipes the prompt via stdin, then closes stdin to signal completion. Deletes ANTHROPIC_BASE_URL from the subprocess env to prevent recursive routing back through CCR. Reads stdout as a line-by-line SSE stream and forwards events in real time.",
             ],
             [
-              "cli:// URL scheme",
+              "Session continuity via .db mtime scan",
+              "AGY writes a SQLite conversation file to ~/.gemini/antigravity-cli/conversations/ after each turn. The runner scans for the most recently modified .db, maps the CCR sessionId to that AGY UUID, and passes --conversation=<uuid> on subsequent turns — keeping multi-message exchanges in a single AGY conversation.",
+            ],
+            [
+              "cli:// URL scheme (upstream contribution)",
               "Extended routing and URL validation to recognise cli://command as a valid api_base_url. The router spawns the referenced binary instead of making an HTTP request — enabling any local CLI tool to act as an LLM provider with zero config overhead.",
-            ],
-            [
-              "Provider test endpoint + UI",
-              "New API route POST /providers/:id/test sends a minimal 'hi' probe to any configured provider using its first defined model. The React UI exposes this as a green Play button per provider — response or error appears in a dialog. Makes misconfiguration immediately visible before routing live traffic.",
             ],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">
@@ -78,17 +79,25 @@ export default function ClaudeCodeRouterPage() {
             <span>→</span>
             <span className="text-zinc-300">router middleware</span>
             <span>→</span>
-            <span className="text-emerald-400">GeminiCLITransformer</span>
+            <span className="text-emerald-400">AgyCLITransformer</span>
           </div>
           <div className="flex flex-wrap gap-2 items-center text-zinc-500 mt-2 ml-4">
             <span>→</span>
-            <span className="text-purple-400">ProcessManager (spawn / reuse)</span>
+            <span className="text-purple-400">runAgyCLI (spawn + stdin close)</span>
             <span>→</span>
-            <span className="text-emerald-400">gemini CLI binary</span>
+            <span className="text-emerald-400">agy binary</span>
             <span>→</span>
-            <span className="text-zinc-300">NDJSON stdout</span>
+            <span className="text-zinc-300">SSE stdout</span>
             <span>→</span>
             <span className="text-amber-400">Anthropic format back</span>
+          </div>
+          <div className="mt-2 ml-4 flex flex-wrap gap-2 items-center text-zinc-500">
+            <span className="text-zinc-600">session map:</span>
+            <span className="text-purple-400">CCR sessionId</span>
+            <span>→</span>
+            <span className="text-zinc-300">.db mtime scan</span>
+            <span>→</span>
+            <span className="text-emerald-400">--conversation=&lt;uuid&gt;</span>
           </div>
           <div className="mt-3 text-zinc-600">
             cli:// prefix bypasses HTTP entirely — no API key, no network call
@@ -101,16 +110,20 @@ export default function ClaudeCodeRouterPage() {
         <div className="flex flex-col gap-3">
           {[
             [
-              "NDJSON stream parsing",
-              "Gemini CLI outputs structured events line-by-line: init (session), message (content), result (stats/error). Parsing each line independently makes the transformer robust to partial output and to log noise appearing before the JSON block.",
+              "Strip MEMORY INJECTED via delimiter split, not line filter",
+              "AGY prepends a MEMORY INJECTED block separated by ━━━ lines. A line-by-line filter broke on multi-line memory entries. Splitting the full output on ━━━ and taking parts.slice(2) handles the block atomically regardless of its internal structure.",
             ],
             [
-              "Persistent process pool over spawn-per-request",
-              "Spawning a fresh gemini process per message adds ~1-2s cold-start latency. The ProcessManager reuses live processes across requests within a session window, trading memory for latency — the right tradeoff for an interactive coding assistant.",
+              "Delete ANTHROPIC_BASE_URL from subprocess env",
+              "Without removing this variable, agy inherits it from the CCR process and routes its own requests back through CCR — an infinite loop. Stripping the key before spawn breaks the cycle while leaving all other env vars intact.",
             ],
             [
-              "Test probe uses first model, not a hardcoded string",
-              "POST /providers/:id/test picks provider.models[0] dynamically. This means the test always reflects the actual routing config — if a provider has no models defined, the test surfaces the misconfiguration rather than silently succeeding with a dummy value.",
+              "Close stdin to signal end-of-input",
+              "AGY reads the prompt from stdin and waits for EOF before responding. Not closing stdin causes the process to hang indefinitely. Calling subprocess.stdin.end() immediately after writing the prompt is the minimal fix.",
+            ],
+            [
+              "mtime scan over process-level session tracking",
+              "AGY does not expose the conversation UUID synchronously. Scanning ~/.gemini/antigravity-cli/conversations/ for the most recently modified .db after each response ties the CCR session to the correct AGY conversation without requiring changes to AGY internals.",
             ],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">
