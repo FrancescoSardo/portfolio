@@ -53,10 +53,10 @@ const PIPELINES: Pipeline[] = [
     status: "active",
   },
   {
-    name: "Worker Delegation (gemini-workers)",
-    flow: ["route-task", "gemini-worker", "capped-report", "synthesize"],
+    name: "Worker Delegation (antigravity-workers)",
+    flow: ["route-task", "agy-worker", "capped-report", "synthesize"],
     language: "Bash + Subagents",
-    llm: "Claude + Gemini",
+    llm: "Claude + AGY CLI",
     status: "active",
   },
   {
@@ -104,8 +104,8 @@ const MAIN_TOOLS: MainTool[] = [
     color: "text-emerald-400",
   },
   {
-    name: "gemini-workers",
-    description: "Claude Code orchestrates 4 read-only Gemini CLI workers (research, architect, reviewer, longcontext). Capped outputs, model fallback, JSONL observability.",
+    name: "antigravity-workers",
+    description: "Claude Code orchestrates 4 read-only Antigravity (AGY) CLI workers (research, architect, reviewer, longcontext). Migrated from Gemini CLI to the AGY invoker. Capped outputs, model fallback, JSONL observability.",
     tag: "multi-agent",
     color: "text-teal-400",
   },
@@ -130,6 +130,43 @@ const MAIN_TOOLS: MainTool[] = [
   },
 ];
 
+const DAILY_SKILLS: MainTool[] = [
+  {
+    name: "claude-mem",
+    description: "Persistent cross-session memory for Claude Code. Captures observations, injects them on session start. Wired into AGY's PreInvocation hook so every new Antigravity conversation opens with the 50 most recent project observations.",
+    github: "https://github.com/thedotmack/claude-mem",
+    tag: "memory · agy-integration",
+    color: "text-violet-400",
+  },
+  {
+    name: "ponytail",
+    description: "Lazy-senior-dev skill: enforces the YAGNI ladder — skip it → stdlib → native → shortest diff. Kills over-engineering before it ships.",
+    github: "https://github.com/DietrichGebert/ponytail/tree/main",
+    tag: "code-discipline",
+    color: "text-amber-300",
+  },
+  {
+    name: "caveman",
+    description: "Ultra-compressed prose mode. Drops articles, filler, and pleasantries while keeping full technical accuracy — ~75% fewer tokens per response.",
+    github: "https://github.com/JuliusBrussee/caveman",
+    tag: "token-efficiency",
+    color: "text-orange-400",
+  },
+  {
+    name: "handoff",
+    description: "Compacts the current conversation into a structured handoff document so a fresh agent can pick up cold with full context.",
+    tag: "context-transfer",
+    color: "text-cyan-400",
+  },
+  {
+    name: "superpowers",
+    description: "Skill framework that wires subagent-driven development, brainstorming, TDD, and systematic debugging into every session — invokes the right skill before acting.",
+    github: "https://github.com/obra/superpowers",
+    tag: "skill-framework",
+    color: "text-emerald-400",
+  },
+];
+
 const MODELS: ModelEntry[] = [
   { model: "claude-sonnet", provider: "Anthropic", use: "code + agent orchestration" },
   { model: "agy (antigravity)", provider: "Google", use: "CCR provider · cross-session memory" },
@@ -146,6 +183,34 @@ const TAGS = [
   "#structured-output",
   "#local-llm",
 ];
+
+function ToolCard({ tool }: { tool: MainTool }) {
+  return (
+    <div className="border border-zinc-800 bg-zinc-900/30 p-4 flex flex-col gap-2 hover:border-zinc-700 transition-colors">
+      <div className="flex items-center justify-between gap-2">
+        <span className={`font-mono text-sm font-semibold ${tool.color}`}>{tool.name}</span>
+        <span className="font-mono text-xs text-zinc-700 border border-zinc-800 px-1.5 py-0.5">
+          #{tool.tag}
+        </span>
+      </div>
+      <p className="font-mono text-xs text-zinc-500 leading-relaxed flex-1">
+        {tool.description}
+      </p>
+      {tool.github ? (
+        <a
+          href={tool.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors w-fit"
+        >
+          GitHub ↗
+        </a>
+      ) : (
+        <span className="font-mono text-xs text-zinc-700">private</span>
+      )}
+    </div>
+  );
+}
 
 export function AILab() {
   const [visibleFeed, setVisibleFeed] = useState<typeof TOOL_FEED>([]);
@@ -176,33 +241,20 @@ export function AILab() {
         {/* Main Tools row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {MAIN_TOOLS.map((tool) => (
-            <div
-              key={tool.name}
-              className="border border-zinc-800 bg-zinc-900/30 p-4 flex flex-col gap-2 hover:border-zinc-700 transition-colors"
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className={`font-mono text-sm font-semibold ${tool.color}`}>{tool.name}</span>
-                <span className="font-mono text-xs text-zinc-700 border border-zinc-800 px-1.5 py-0.5">
-                  #{tool.tag}
-                </span>
-              </div>
-              <p className="font-mono text-xs text-zinc-500 leading-relaxed flex-1">
-                {tool.description}
-              </p>
-              {tool.github ? (
-                <a
-                  href={tool.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs text-zinc-600 hover:text-amber-400 transition-colors w-fit"
-                >
-                  GitHub ↗
-                </a>
-              ) : (
-                <span className="font-mono text-xs text-zinc-700">private</span>
-              )}
-            </div>
+            <ToolCard key={tool.name} tool={tool} />
           ))}
+        </div>
+
+        {/* Daily Skills row */}
+        <div className="flex flex-col gap-3">
+          <p className="font-mono text-xs text-zinc-600">
+            // daily skills — installed in every session
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {DAILY_SKILLS.map((skill) => (
+              <ToolCard key={skill.name} tool={skill} />
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">

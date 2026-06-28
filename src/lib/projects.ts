@@ -44,16 +44,16 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "gemini-workers",
+    slug: "antigravity-workers",
     number: "05",
-    title: "GEMINI WORKERS",
+    title: "ANTIGRAVITY WORKERS",
     status: "private",
     statusLabel: "● PRIVATE — Daily Driver",
-    hook: "Multi-agent orchestration system where Claude Code delegates research, architecture review, code review, and 1M-token analysis to a pool of four read-only Gemini CLI workers with hard-capped outputs.",
-    techStack: ["Bash", "Claude Code", "Gemini CLI", "Python", "JSONL"],
+    hook: "Multi-agent orchestration system where Claude Code delegates research, architecture review, code review, and long-context analysis to a pool of four read-only Antigravity (AGY) CLI workers with hard-capped outputs. Migrated from Gemini CLI to the AGY invoker.",
+    techStack: ["Bash", "Claude Code", "Antigravity CLI", "Python", "JSONL"],
     metrics: "4 Workers · 54/54 Tests · Read-only Execution · Model Fallback Chain",
     links: {
-      caseStudy: "/projects/gemini-workers",
+      caseStudy: "/projects/antigravity-workers",
     },
   },
   {
