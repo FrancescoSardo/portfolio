@@ -22,9 +22,9 @@ export const projects: Project[] = [
     title: "AGENTOPS DASHBOARD",
     status: "private",
     statusLabel: "● PRIVATE — Daily Driver (AGY in progress)",
-    hook: "Local read-only dashboard that makes agent internals visible across config, skills, memory, tokens, agents, and hooks. Expanding dual-mode support to Google Antigravity (AGY) CLI (in progress) and orchestrating a custom seamless workflow integration between claude-mem and Antigravity CLI for cross-session context injection.",
+    hook: "Local read-only dashboard that makes agent internals visible across config, skills, memory, tokens, agents, hooks, and a Network session inspector for browsing conversation history and tool usage. Expanding dual-mode support to Google Antigravity (AGY) CLI (in progress) and orchestrating a custom seamless workflow integration between claude-mem and Antigravity CLI for cross-session context injection.",
     techStack: ["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite"],
-    metrics: "12 Data Domains · Claude + AGY · claude-mem Integration · Read-only",
+    metrics: "13 Data Domains · Claude + AGY · Network Inspector · claude-mem Integration · Read-only",
     links: {
       caseStudy: "/projects/agentops-dashboard",
     },
@@ -67,6 +67,21 @@ export const projects: Project[] = [
     metrics: "~3,100 lines parser · TAM 5.02/7 · 100% round-trip fidelity · 0 structural runtime errors",
     links: {
       caseStudy: "/projects/cwl-editor",
+    },
+  },
+  {
+    slug: "shopi-pulse",
+    number: "06",
+    title: "SHOPI PULSE",
+    isNew: true,
+    status: "live",
+    statusLabel: "● LIVE — Shopify App (Production + Staging)",
+    hook: "Shopify store optimization platform — an AI agent orchestrator reads live store data through the Shopify Admin API and executes approved changes (pricing, inventory, product content) under a human-approval guardrail.",
+    techStack: ["NestJS", "Next.js", "Prisma", "PostgreSQL", "Redis", "Turborepo", "Shopify API", "Claude / OpenRouter"],
+    metrics: "pnpm/Turborepo monorepo · SSE streaming agent loop · multi-provider LLM · human-approval writes",
+    links: {
+      caseStudy: "/projects/shopi-pulse",
+      live: "https://app.pulse-ai.uk",
     },
   },
 ];

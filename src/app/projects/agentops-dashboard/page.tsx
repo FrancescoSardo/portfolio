@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const METRICS = [
-  { value: "12", label: "Data Domains" },
+  { value: "13", label: "Data Domains" },
   { value: "3", label: "Agents (Claude, Gemini, AGY)" },
   { value: "Daily", label: "Usage" },
   { value: "Read-only", label: "Design Constraint" },
@@ -39,6 +39,11 @@ const IMAGES = [
     alt: "AgentOps Dashboard — token usage",
     caption: "Token usage — real-time monitoring across models and providers",
   },
+  {
+    src: "/img/agent-dash4.png",
+    alt: "AgentOps Dashboard — network session inspector",
+    caption: "Network — browse agent sessions, inspect full conversation history and tool call results",
+  },
 ];
 
 export default function AgentOpsDashboardPage() {
@@ -47,7 +52,7 @@ export default function AgentOpsDashboardPage() {
       title="AgentOps Dashboard"
       statusLabel="● PRIVATE — Daily Driver"
       statusColor="text-amber-400 border-amber-400/30"
-      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 12 data domains, expanding agent support (Claude, Gemini, and Google Antigravity CLI in progress), and a custom workflow integration with claude-mem for cross-session context."
+      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 13 data domains including a Network session inspector for conversation replay and tool-call auditing, expanding agent support (Claude, Gemini, and Google Antigravity CLI in progress), and a custom workflow integration with claude-mem for cross-session context."
       techStack={["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite", "Caddy", "Tailscale"]}
       metrics={METRICS}
       images={IMAGES}
@@ -161,6 +166,44 @@ export default function AgentOpsDashboardPage() {
       </section>
 
       <section>
+        <h2 className="font-mono text-base text-zinc-200 mb-3">// Network — Session Inspector</h2>
+        <p className="mb-4">
+          The most operationally useful page in the dashboard. Network reads the local JSONL
+          transcript logs that Claude Code, Gemini CLI, and Antigravity CLI write for every
+          conversation, then surfaces them as a browsable session list with full conversation
+          replay and tool-call inspection.
+        </p>
+        <div className="flex flex-col gap-3">
+          {[
+            [
+              "Session browsing",
+              "Two-pane layout: a filterable session list on the left with project name, timestamp, and duration — detail panel on the right. Click any session to load its full transcript. Sessions are discovered by scanning each agent's local log directories, no external API needed.",
+            ],
+            [
+              "Conversation history replay",
+              "Every user prompt and model response rendered in sequence, preserving the original turn structure. System messages, injected context blocks, and thinking traces are visually distinguished so you can trace exactly what the agent saw at each step.",
+            ],
+            [
+              "Tool usage and output inspection",
+              "Each tool call is rendered as a collapsible block showing the tool name, arguments, and full output. File edits display diffs, terminal commands show stdout/stderr, and search results are formatted inline. This makes it trivial to audit what the agent actually did versus what it claimed.",
+            ],
+            [
+              "Cross-agent unified view",
+              "Same UI works across Claude Code, Gemini CLI, and Antigravity CLI sessions. Each agent writes transcripts in a different format (JSONL with varying schemas); the backend normalizes them into a common structure so the frontend renders all three identically.",
+            ],
+          ].map(([title, desc]) => (
+            <div key={title as string} className="flex gap-3">
+              <span className="text-amber-400/50 shrink-0 mt-0.5">▪</span>
+              <div>
+                <span className="text-zinc-300">{title}: </span>
+                <span className="text-zinc-500">{desc}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
         <h2 className="font-mono text-base text-zinc-200 mb-3">// Data Domains</h2>
         <div className="border border-zinc-800 bg-zinc-900/40 p-4 font-mono text-xs">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1.5 text-zinc-500">
@@ -176,6 +219,7 @@ export default function AgentOpsDashboardPage() {
               ["Scripts", "~/.claude/scripts/"],
               ["Tokens", "codeburn CLI — 5-min /tmp cache, mock fallback"],
               ["Obsidian", "Fixed vault — agent-agnostic"],
+              ["Network", "JSONL transcript logs — session replay + tool call inspection"],
               ["Tooling", "Homebrew + npm + pip + Cargo + Go + RubyGems"],
             ].map(([domain, source]) => (
               <div key={domain as string} className="flex gap-2">

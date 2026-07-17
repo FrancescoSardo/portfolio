@@ -5,6 +5,7 @@ export interface Project {
   status: "live" | "thesis" | "experimental" | "private" | "contribution";
   statusLabel: string;
   hook: string;
+  isNew?: boolean;
   techStack: string[];
   metrics: string;
   links: {

@@ -14,8 +14,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <span className="font-mono text-xs text-zinc-600 tracking-widest">
           {project.number}
         </span>
-        <h3 className="font-mono text-base font-semibold text-zinc-100 tracking-wide">
+        <h3 className="font-mono text-base font-semibold text-zinc-100 tracking-wide flex items-center gap-2">
           {project.title}
+          {project.isNew && (
+            <span className="font-mono text-[10px] font-bold tracking-widest text-emerald-400 border border-emerald-400/40 px-1.5 py-0.5 rounded-sm">
+              NEW
+            </span>
+          )}
         </h3>
         <StatusDot status={project.status} label={project.statusLabel} />
       </div>
