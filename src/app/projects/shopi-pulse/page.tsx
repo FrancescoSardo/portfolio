@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 };
 
 const METRICS = [
-  { value: "5", label: "Workspace Packages" },
+  { value: "31", label: "AI Agent Tools" },
   { value: "SSE", label: "Streaming Agent Loop" },
-  { value: "Multi", label: "LLM Provider Support" },
-  { value: "Prod", label: "Live on Shopify Partners" },
+  { value: "0", label: "Login Screens — Embedded Auth" },
+  { value: "3", label: "Billing Tiers (Shopify Native)" },
 ];
 
 const IMAGES = [
@@ -41,10 +41,10 @@ export default function ShopiPulsePage() {
   return (
     <CaseStudyLayout
       title="Shopi Pulse"
-      statusLabel="● LIVE — Shopify App (Production + Staging)"
+      statusLabel="● LIVE — Embedded Shopify App (Production + Staging)"
       statusColor="text-emerald-400 border-emerald-400/30"
-      tagline="Shopify store optimization platform: an AI agent reads live store data through the Shopify Admin API, reasons over multi-step tool calls, and executes approved changes (pricing, inventory, product content) with a human-in-the-loop approval gate."
-      techStack={["NestJS", "Next.js", "Prisma", "PostgreSQL", "Redis", "Turborepo", "Shopify API", "Claude / OpenRouter"]}
+      tagline="Shopify store optimization platform embedded directly in the Shopify admin: an AI agent reads live store data through the Admin API, reasons over multi-step tool calls, and executes changes (pricing, inventory, product content) behind tier-gated human-in-the-loop approvals. No login screen — the store itself is the identity."
+      techStack={["NestJS", "Next.js", "App Bridge", "Prisma", "PostgreSQL", "Redis", "Turborepo", "Shopify API", "Claude / OpenRouter"]}
       metrics={METRICS}
       images={IMAGES}
     >
@@ -71,8 +71,16 @@ export default function ShopiPulsePage() {
               "Multi-turn agent service drives read tools (products, orders, inventory) and write tools (price/content updates) against the Shopify Admin API, streaming progress to the frontend over SSE with anti-buffering headers through the Cloudflare + reverse-proxy chain.",
             ],
             [
-              "Human-approval guardrails",
-              "Write actions land in a PendingAction queue and require explicit approval before they touch the live store — the agent proposes, the merchant confirms.",
+              "Embedded-only auth, no login",
+              "The app lives inside the Shopify admin iframe (App Bridge v4). Install is cookieless: the frontend's signed session token is exchanged server-side for an expiring offline Admin API token — no OAuth redirect, no user table, no passwords. Shop identity comes only from HMAC-verified session tokens, never from query params.",
+            ],
+            [
+              "Tier-gated approval guardrails",
+              "Write actions land in a PendingAction queue for explicit approval, or auto-execute on paid tiers with a per-store toggle — tier limits enforced server-side on every request, independent of stored toggle state.",
+            ],
+            [
+              "Native Shopify billing",
+              "Subscription flow through Shopify's Billing API (appSubscriptionCreate) with FREE/PRO/CUSTOM tiers, deduplicated billing webhooks, synchronous downgrade on cancel, and per-store daily usage limits.",
             ],
             [
               "Multi-provider LLM abstraction",
@@ -98,6 +106,10 @@ export default function ShopiPulsePage() {
         <h2 className="font-mono text-base text-zinc-200 mb-3">// Architecture</h2>
         <div className="border border-zinc-800 bg-zinc-900/40 p-4 font-mono text-xs">
           <div className="flex flex-wrap gap-2 items-center text-zinc-500">
+            <span className="text-blue-400">Shopify admin iframe</span>
+            <span>→</span>
+            <span className="text-zinc-300">App Bridge session token</span>
+            <span>→</span>
             <span className="text-emerald-400">Next.js dashboard</span>
             <span>→</span>
             <span className="text-zinc-300">SSE chat stream</span>
@@ -113,7 +125,7 @@ export default function ShopiPulsePage() {
             <span className="text-emerald-400">PendingAction approval gate</span>
           </div>
           <div className="mt-3 text-zinc-600">
-            Postgres + Prisma for persistence, Redis for queues/cache, Docker Compose for local infra
+            Postgres + Prisma for persistence, Redis + BullMQ for store sync, native Shopify billing for subscriptions
           </div>
         </div>
       </section>
@@ -135,8 +147,16 @@ export default function ShopiPulsePage() {
               "Real-time streaming was silently buffered by the Cloudflare + reverse-proxy path. Fixed with explicit X-Accel-Buffering headers and forced header flush rather than switching transport.",
             ],
             [
-              "Writes are gated, reads are not",
-              "Read tools execute immediately; write tools always create a PendingAction and stop, so the agent can be genuinely useful for inspection without ever mutating a live store unsupervised.",
+              "Reads are free, writes are tier-gated",
+              "Read tools execute immediately; write tools stage a PendingAction or auto-execute only when the store's billing tier allows it — enforcement lives in the per-request limit resolution, so a stale toggle left on after a downgrade can't bypass the gate.",
+            ],
+            [
+              "The store is the identity",
+              "No merchant accounts, sessions, or refresh tokens to manage. Every request's shop comes from a short-lived HMAC-signed session token; expiring offline Admin API tokens are refreshed through a single choke-point service every caller (sync, billing, AI tools) must go through.",
+            ],
+            [
+              "Live tests over mocks",
+              "An env-gated Jest suite runs all 31 agent tools against a real staging store. It caught two production GraphQL bugs that mocked unit tests masked — the mocks had encoded the broken schema. Write tools carry undo handlers so test mutations roll back.",
             ],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">
