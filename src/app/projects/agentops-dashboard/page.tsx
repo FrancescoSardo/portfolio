@@ -7,8 +7,9 @@ export const metadata: Metadata = {
 };
 
 const METRICS = [
-  { value: "13", label: "Data Domains" },
+  { value: "14", label: "Data Domains" },
   { value: "3", label: "Agents (Claude, Gemini, AGY)" },
+  { value: "macOS", label: "Native Desktop App (Tauri)" },
   { value: "Daily", label: "Usage" },
   { value: "Read-only", label: "Design Constraint" },
 ];
@@ -30,11 +31,6 @@ const IMAGES = [
     caption: "Tooling page — all installed tools across Homebrew, npm, pip, Cargo, and more",
   },
   {
-    src: "/img/agent-kg.png",
-    alt: "AgentOps Dashboard — knowledge graph",
-    caption: "Knowledge Graph — visual representation of agent memory and cross-references",
-  },
-  {
     src: "/img/agent-token.png",
     alt: "AgentOps Dashboard — token usage",
     caption: "Token usage — real-time monitoring across models and providers",
@@ -52,7 +48,7 @@ export default function AgentOpsDashboardPage() {
       title="AgentOps Dashboard"
       statusLabel="● PRIVATE — Daily Driver"
       statusColor="text-amber-400 border-amber-400/30"
-      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 13 data domains including a Network session inspector for conversation replay and tool-call auditing, expanding agent support (Claude, Gemini, and Google Antigravity CLI in progress), and a custom workflow integration with claude-mem for cross-session context."
+      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 14 data domains including a Network session inspector for conversation replay and tool-call auditing, expanding agent support (Claude, Gemini, and Google Antigravity CLI in progress), a live quota view for Claude and AGY, an in-app terminal, a native macOS desktop app, and a custom workflow integration with claude-mem for cross-session context."
       techStack={["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite", "Caddy", "Tailscale"]}
       metrics={METRICS}
       images={IMAGES}
@@ -100,9 +96,12 @@ export default function AgentOpsDashboardPage() {
         <div className="flex flex-col gap-3">
           {[
             ["WAL proxy for SQLite", "The claude-mem worker holds an exclusive write lock on its WAL file. A second connection returns 0 frames — the worker won't release. Solution: proxy through the worker's own HTTP API at :37777, paginating 100 rows at a time, with direct SQLite fallback if the worker is unreachable."],
-            ["Dual-agent architecture", "Every API endpoint accepts ?agent=claude|gemini. Readers branch on this param to select the correct directories (~/.claude/ vs ~/.gemini/). The frontend AgentContext drives all page re-fetches on toggle. Agent-agnostic endpoints (tokens, Obsidian) accept but ignore the param."],
+            ["Dual-agent architecture", "Every API endpoint accepts ?agent=claude|gemini. Readers branch on this param to select the correct directories (~/.claude/ vs ~/.gemini/). The frontend AgentContext drives all page re-fetches on toggle. Agent-agnostic endpoints (e.g. tokens) accept but ignore the param."],
             ["Antigravity (AGY) Integration (In Progress)", "Expanding beyond Claude/Gemini to support Google Antigravity. Built a dedicated AGY mode featuring a real-time projects grid, custom URI handlers (antigravity-ide://) to launch the native IDE directly from the web, and a unified hooks visualizer to parse complex lifecycle events."],
             ["claude-mem × AGY Integration", "Wired the claude-mem MCP plugin into AGY's PreInvocation hook lifecycle so every new AGY session opens with the 50 most recent project observations injected as a system message. The hook reads the daemon port from ~/.claude-mem/worker.pid at runtime — bypassing the bun subprocess entirely — because worker-service.cjs computes port 37700+(uid%100)=37701 while the actual daemon runs on 37777. Calling the HTTP REST API directly (GET /api/observations?limit=50&project=<name>) returns 4k+ bytes of real cross-session context. A per-conversationId lockfile in /tmp/ ensures injection fires only on the first message, not every turn."],
+            ["Native macOS desktop app", "Packaged as a Tauri shell that supervises a PyInstaller-bundled FastAPI sidecar (restart policy, log file, parent watchdog) and serves a static Next.js export. Desktop mode swaps the web login for a per-launch token and bootstrap cookie, enforces a trusted host and CSP, recovers the login-shell PATH for GUI launches, and ships as an arm64 dmg via a single build script."],
+            ["Live Claude + AGY quota", "Neither CLI exposes quota through an API, so the backend drives each TUI through a pty, sends /usage, strips the ANSI output and parses session / weekly / 5-hour limits into a cached payload. A parse that finds no limits is never cached, so a format change in the CLI shows an explicit error on the dashboard instead of a stale empty card."],
+            ["Project-scoped, one-click terminals", "A global project selector scopes every endpoint through a validated per-request project param. Project cards open the project in a new iTerm window, cd the current iTerm window into it (Shift for a new tab), or launch an in-app PTY terminal — paths are shell- and AppleScript-escaped before they reach osascript."],
             ["Resilient parallel fetch", "The dashboard landing page uses Promise.allSettled for dual-agent data fetches. One agent misconfiguration doesn't break the page — partial data renders, errors surface as status pills."],
             ["Read-only constraint", "No write endpoints. The dashboard never mutates config, memory, or any file. CORS locked to localhost:3000. This constraint removes an entire class of risk and lets me run it persistently without concern."],
             ["Security & Infrastructure", "Hardened security using a Caddy reverse proxy and enforced Tailscale-only access for sensitive API routes. Both backend and frontend run as PM2 processes managed by start.sh / stop.sh."],
@@ -218,7 +217,8 @@ export default function AgentOpsDashboardPage() {
               ["Plans", "~/.claude/plans/*.md — content + slide-over preview"],
               ["Scripts", "~/.claude/scripts/"],
               ["Tokens", "codeburn CLI — 5-min /tmp cache, mock fallback"],
-              ["Obsidian", "Fixed vault — agent-agnostic"],
+              ["MCP", "Per-provider MCP servers — connection strings, headers and command secrets redacted"],
+              ["Terminal", "In-app PTY terminal, project-scoped"],
               ["Network", "JSONL transcript logs — session replay + tool call inspection"],
               ["Tooling", "Homebrew + npm + pip + Cargo + Go + RubyGems"],
             ].map(([domain, source]) => (
