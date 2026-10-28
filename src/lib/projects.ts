@@ -21,8 +21,8 @@ export const projects: Project[] = [
     number: "03",
     title: "AGENTOPS DASHBOARD",
     status: "private",
-    statusLabel: "● PRIVATE — Daily Driver (AGY in progress)",
-    hook: "Local read-only dashboard, now also a native macOS app (Tauri), that makes agent internals visible across config, skills, memory, tokens, live Claude/AGY quota, agents, hooks, MCP servers, and a Network session inspector for browsing conversation history and tool usage. Expanding dual-mode support to Google Antigravity (AGY) CLI (in progress) and orchestrating a custom seamless workflow integration between claude-mem and Antigravity CLI for cross-session context injection.",
+    statusLabel: "● PRIVATE — Daily Driver",
+    hook: "Local read-only dashboard, now also a native macOS app (Tauri), that makes agent internals visible across config, skills, memory, tokens, live Claude/AGY quota, agents, hooks, MCP servers, and a Network session inspector for browsing conversation history and tool usage. Supports Claude Code, Gemini CLI and Google Antigravity (AGY) CLI, with a custom seamless workflow integration between claude-mem and Antigravity CLI for cross-session context injection.",
     techStack: ["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite"],
     metrics: "14 Data Domains · Claude + AGY · macOS Desktop App · Live Quota · Network Inspector · claude-mem Integration · Read-only",
     links: {
@@ -82,6 +82,19 @@ export const projects: Project[] = [
     links: {
       caseStudy: "/projects/shopi-pulse",
       live: "https://app.pulse-ai.uk",
+    },
+  },
+  {
+    slug: "llm-gateway",
+    number: "07",
+    title: "LLM GATEWAY",
+    status: "experimental",
+    statusLabel: "● EXPERIMENTAL — Local OpenAI-compatible server",
+    hook: "Single-file, zero-dependency Node server that exposes local AI CLIs (Claude Code, Antigravity, Gemini) through the standard OpenAI API, so any OpenAI-compatible app or agent can use them without API keys. Covers chat completions, the Responses API, model discovery, real SSE streaming, and tool calling emulated on top of CLIs that have no native tool API.",
+    techStack: ["Node.js", "JavaScript", "SSE", "OpenAI API", "ngrok"],
+    metrics: "~220 lines · 0 dependencies · /chat/completions + /responses + /models · SSE streaming · bearer-key auth",
+    links: {
+      caseStudy: "/projects/llm-gateway",
     },
   },
 ];

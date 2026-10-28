@@ -40,6 +40,11 @@ const IMAGES = [
     alt: "AgentOps Dashboard — network session inspector",
     caption: "Network — browse agent sessions, inspect full conversation history and tool call results",
   },
+  {
+    src: "/img/agent-architecture.png",
+    alt: "AgentOps Dashboard — system architecture diagram",
+    caption: "System architecture — clients, Caddy + Tailscale edge, Next.js proxy, FastAPI readers and PTY terminal over local agent data",
+  },
 ];
 
 export default function AgentOpsDashboardPage() {
@@ -48,7 +53,7 @@ export default function AgentOpsDashboardPage() {
       title="AgentOps Dashboard"
       statusLabel="● PRIVATE — Daily Driver"
       statusColor="text-amber-400 border-amber-400/30"
-      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 14 data domains including a Network session inspector for conversation replay and tool-call auditing, expanding agent support (Claude, Gemini, and Google Antigravity CLI in progress), a live quota view for Claude and AGY, an in-app terminal, a native macOS desktop app, and a custom workflow integration with claude-mem for cross-session context."
+      tagline="Local read-only web dashboard that makes AI agent internals visible. Built for personal daily use — 14 data domains including a Network session inspector for conversation replay and tool-call auditing, multi-agent support (Claude Code, Gemini CLI and Google Antigravity CLI), a live quota view for Claude and AGY, an in-app terminal, a native macOS desktop app, and a custom workflow integration with claude-mem for cross-session context."
       techStack={["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite", "Caddy", "Tailscale"]}
       metrics={METRICS}
       images={IMAGES}
@@ -77,7 +82,7 @@ export default function AgentOpsDashboardPage() {
         <h2 className="font-mono text-base text-zinc-200 mb-3">// Architecture</h2>
         <div className="border border-zinc-800 bg-zinc-900/40 p-4 font-mono text-xs">
           <div className="flex flex-wrap gap-2 items-center text-zinc-500">
-            <span className="text-amber-400">Next.js :3000</span>
+            <span className="text-amber-400">Next.js :9999</span>
             <span>→</span>
             <span className="text-blue-400">FastAPI :8000</span>
             <span>→</span>
@@ -86,7 +91,7 @@ export default function AgentOpsDashboardPage() {
             <span className="text-purple-400">SQLite (claude-mem)</span>
           </div>
           <div className="mt-3 text-zinc-600">
-            PM2 manages both processes via start.sh / stop.sh
+            Web: PM2 runs both processes via start.sh / stop.sh, Caddy + Tailscale for remote access. Desktop: Tauri bundles the backend and serves a static export.
           </div>
         </div>
       </section>
@@ -96,14 +101,14 @@ export default function AgentOpsDashboardPage() {
         <div className="flex flex-col gap-3">
           {[
             ["WAL proxy for SQLite", "The claude-mem worker holds an exclusive write lock on its WAL file. A second connection returns 0 frames — the worker won't release. Solution: proxy through the worker's own HTTP API at :37777, paginating 100 rows at a time, with direct SQLite fallback if the worker is unreachable."],
-            ["Dual-agent architecture", "Every API endpoint accepts ?agent=claude|gemini. Readers branch on this param to select the correct directories (~/.claude/ vs ~/.gemini/). The frontend AgentContext drives all page re-fetches on toggle. Agent-agnostic endpoints (e.g. tokens) accept but ignore the param."],
-            ["Antigravity (AGY) Integration (In Progress)", "Expanding beyond Claude/Gemini to support Google Antigravity. Built a dedicated AGY mode featuring a real-time projects grid, custom URI handlers (antigravity-ide://) to launch the native IDE directly from the web, and a unified hooks visualizer to parse complex lifecycle events."],
+            ["Multi-agent architecture", "Every agent-aware endpoint accepts ?agent=claude|gemini|antigravity. Readers branch on this param to select the correct directories (~/.claude/, ~/.gemini/, ~/.gemini/antigravity-cli/). The frontend AgentContext drives all page re-fetches on toggle. Agent-agnostic endpoints (e.g. tokens) accept but ignore the param."],
+            ["Antigravity (AGY) Integration", "Extended beyond Claude/Gemini to support Google Antigravity. Built a dedicated AGY mode featuring a real-time projects grid, custom URI handlers (antigravity-ide://) to launch the native IDE directly from the web, and a unified hooks visualizer to parse complex lifecycle events."],
             ["claude-mem × AGY Integration", "Wired the claude-mem MCP plugin into AGY's PreInvocation hook lifecycle so every new AGY session opens with the 50 most recent project observations injected as a system message. The hook reads the daemon port from ~/.claude-mem/worker.pid at runtime — bypassing the bun subprocess entirely — because worker-service.cjs computes port 37700+(uid%100)=37701 while the actual daemon runs on 37777. Calling the HTTP REST API directly (GET /api/observations?limit=50&project=<name>) returns 4k+ bytes of real cross-session context. A per-conversationId lockfile in /tmp/ ensures injection fires only on the first message, not every turn."],
             ["Native macOS desktop app", "Packaged as a Tauri shell that supervises a PyInstaller-bundled FastAPI sidecar (restart policy, log file, parent watchdog) and serves a static Next.js export. Desktop mode swaps the web login for a per-launch token and bootstrap cookie, enforces a trusted host and CSP, recovers the login-shell PATH for GUI launches, and ships as an arm64 dmg via a single build script."],
             ["Live Claude + AGY quota", "Neither CLI exposes quota through an API, so the backend drives each TUI through a pty, sends /usage, strips the ANSI output and parses session / weekly / 5-hour limits into a cached payload. A parse that finds no limits is never cached, so a format change in the CLI shows an explicit error on the dashboard instead of a stale empty card."],
-            ["Project-scoped, one-click terminals", "A global project selector scopes every endpoint through a validated per-request project param. Project cards open the project in a new iTerm window, cd the current iTerm window into it (Shift for a new tab), or launch an in-app PTY terminal — paths are shell- and AppleScript-escaped before they reach osascript."],
+            ["One-click terminals", "The UI is global; endpoints still accept an optional, validated per-request project param. Project cards open the project in a new iTerm window, cd the current iTerm window into it (Shift for a new tab), or launch an in-app PTY terminal — paths are shell- and AppleScript-escaped before they reach osascript."],
             ["Resilient parallel fetch", "The dashboard landing page uses Promise.allSettled for dual-agent data fetches. One agent misconfiguration doesn't break the page — partial data renders, errors surface as status pills."],
-            ["Read-only constraint", "No write endpoints. The dashboard never mutates config, memory, or any file. CORS locked to localhost:3000. This constraint removes an entire class of risk and lets me run it persistently without concern."],
+            ["Read-only by default", "Config readers never mutate agent config or memory. Writes are limited to explicit user actions (file editor, terminal, open in editor) and every HTTP route sits behind a server-side API key. CORS locked to localhost:9999 plus an optional Tailscale origin."],
             ["Security & Infrastructure", "Hardened security using a Caddy reverse proxy and enforced Tailscale-only access for sensitive API routes. Both backend and frontend run as PM2 processes managed by start.sh / stop.sh."],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">
@@ -189,6 +194,45 @@ export default function AgentOpsDashboardPage() {
             [
               "Cross-agent unified view",
               "Same UI works across Claude Code, Gemini CLI, and Antigravity CLI sessions. Each agent writes transcripts in a different format (JSONL with varying schemas); the backend normalizes them into a common structure so the frontend renders all three identically.",
+            ],
+          ].map(([title, desc]) => (
+            <div key={title as string} className="flex gap-3">
+              <span className="text-amber-400/50 shrink-0 mt-0.5">▪</span>
+              <div>
+                <span className="text-zinc-300">{title}: </span>
+                <span className="text-zinc-500">{desc}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-mono text-base text-zinc-200 mb-3">
+          // Assistant <span className="text-amber-400 text-xs border border-amber-400/30 px-1.5 py-0.5 ml-2 align-middle">IN PROGRESS</span>
+        </h2>
+        <p className="mb-4">
+          A chat page that turns the dashboard into a personal assistant: a tool-calling agent loop
+          that streams through a local LLM gateway, with a model selector and a status line for
+          usage. Tools are added one at a time, each with its own guardrails and tests.
+        </p>
+        <div className="flex flex-col gap-3">
+          {[
+            [
+              "Agent loop + model selector",
+              "The backend runs the tool-calling loop and streams deltas to the chat UI. The model is picked per conversation, and the stream survives page navigation through a module-level store.",
+            ],
+            [
+              "Read-only file and git tools",
+              "The agent can list, read, grep and find files and run git_log / git_diff, but only inside folders the user picks in a Folders picker. Roots must sit inside $HOME, credential dirs and secret-like files are never readable, symlinks cannot escape a root, and git runs with hooks and fsmonitor disabled and bounded output.",
+            ],
+            [
+              "Apple Notes and Apple Calendar",
+              "Notes are read through AppleScript; Calendar goes through a small signed Swift CLI on EventKit (list calendars and events, create and delete events), with calendar entitlements declared for the desktop app's Hardened Runtime.",
+            ],
+            [
+              "Next",
+              "More personal-data tools behind the same pattern, and a debug panel to exercise each tool live before the agent uses it.",
             ],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">

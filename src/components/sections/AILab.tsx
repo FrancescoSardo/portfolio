@@ -93,7 +93,7 @@ const MAIN_TOOLS: MainTool[] = [
   },
   {
     name: "agentops-dashboard",
-    description: "Local read-only dashboard for Claude Code internals — 12 data domains: config, skills, memory, tokens, agents, commands, tooling.",
+    description: "Local dashboard for Claude Code, Gemini CLI and Antigravity internals — 14 data domains: config, skills, memory, tokens, agents, commands, tooling, network, terminal.",
     tag: "observability",
     color: "text-orange-300",
   },
