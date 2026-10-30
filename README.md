@@ -2,7 +2,7 @@
 
 Personal portfolio of Francesco Sardo. Terminal-styled single-page site with per-project case studies.
 
-Live: https://portfolio-five-delta-70.vercel.app
+Live: https://francescosardo-portfolio.vercel.app/#projects
 
 ## Stack
 
