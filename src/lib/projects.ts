@@ -97,6 +97,20 @@ export const projects: Project[] = [
       caseStudy: "/projects/llm-gateway",
     },
   },
+  {
+    slug: "inference-engine",
+    number: "08",
+    title: "QWEN3 INFERENCE ENGINE",
+    isNew: true,
+    status: "experimental",
+    statusLabel: "● EXPERIMENTAL — Local C + Metal inference engine",
+    hook: "From-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS — mmap weight loading, BPE tokenizer, RMSNorm/QK-Norm/RoPE/GQA/SwiGLU CPU forward pass, 128-expert top-8 routing, and an OpenAI-compatible HTTP server. Mainly inspired by antirez's DS4. Metal backend context in progress: device, shader pipeline cache, no-copy weight buffers, KV and activation allocation.",
+    techStack: ["C", "Metal", "GGUF", "Qwen3", "GQA / MoE", "POSIX HTTP"],
+    metrics: "2 architectures · ~8.7k LOC · 151,936-token vocab · CPU baseline: 0.55 tok/s prefill / 0.68 tok/s decode · OpenAI-compatible API · Metal context scaffolded",
+    links: {
+      caseStudy: "/projects/inference-engine",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
