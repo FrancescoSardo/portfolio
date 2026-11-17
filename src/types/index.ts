@@ -6,6 +6,7 @@ export interface Project {
   statusLabel: string;
   hook: string;
   isNew?: boolean;
+  image?: string;
   techStack: string[];
   metrics: string;
   links: {

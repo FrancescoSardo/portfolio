@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { Button } from "@/components/ui/Button";
@@ -8,8 +10,44 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const previewHref =
+    project.links.caseStudy ||
+    project.links.live ||
+    project.links.github ||
+    project.links.appStore;
+
+  const isExternal = previewHref && !previewHref.startsWith("/");
+
+  const imagePreview = project.image && (
+    <div className="relative aspect-video w-full overflow-hidden border border-zinc-800 bg-zinc-950/60 flex items-center justify-center">
+      <Image
+        src={project.image}
+        alt={`${project.title} preview`}
+        fill
+        className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
+        unoptimized
+      />
+    </div>
+  );
+
   return (
-    <div className="border border-zinc-800 bg-zinc-900/30 p-6 flex flex-col gap-4 hover:border-zinc-700 transition-colors duration-300 group">
+    <div className="border border-zinc-800 bg-zinc-900/30 p-6 flex flex-col gap-4 hover:border-zinc-700 transition-colors duration-300 group h-full">
+      {project.image && (
+        previewHref ? (
+          <Link
+            href={previewHref}
+            aria-label={`${project.title} preview`}
+            className="block"
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+          >
+            {imagePreview}
+          </Link>
+        ) : (
+          imagePreview
+        )
+      )}
+
       <div className="flex flex-col gap-2">
         <span className="font-mono text-xs text-zinc-600 tracking-widest">
           {project.number}

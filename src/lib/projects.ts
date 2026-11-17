@@ -8,6 +8,7 @@ export const projects: Project[] = [
     status: "live",
     statusLabel: "● LIVE — App Store + Google Play",
     hook: "Co-founded and led mobile development of a production event ticketing platform serving real customers across iOS and Android.",
+    image: "/img/iPhone 14-15 Pro Max 6.7 - Home.png",
     techStack: ["React Native", "TypeScript", "Redux Toolkit", "Firebase", "Stripe", "NativeWind"],
     metrics: "iOS ✓ · Android ✓ · Live in Production · App Store + Google Play",
     links: {
@@ -23,6 +24,7 @@ export const projects: Project[] = [
     status: "private",
     statusLabel: "● PRIVATE — Daily Driver",
     hook: "Local read-only dashboard, now also a native macOS app (Tauri), that makes agent internals visible across config, skills, memory, tokens, live Claude/AGY quota, agents, hooks, MCP servers, and a Network session inspector for browsing conversation history and tool usage. Supports Claude Code, Gemini CLI and Google Antigravity (AGY) CLI, with a custom seamless workflow integration between claude-mem and Antigravity CLI for cross-session context injection.",
+    image: "/img/agent-dash1.png",
     techStack: ["Next.js", "React 19", "TypeScript", "FastAPI", "Python", "Tailwind CSS 4", "shadcn/ui", "SQLite"],
     metrics: "14 Data Domains · Claude + AGY · macOS Desktop App · Live Quota · Network Inspector · claude-mem Integration · Read-only",
     links: {
@@ -63,6 +65,7 @@ export const projects: Project[] = [
     status: "thesis",
     statusLabel: "● MSc THESIS · Apr 2026",
     hook: "Visual low-code IDE for scientific pipelines — bidirectional CWL parser, real-time type checking, TAM score 5.02/7 in domain expert user study.",
+    image: "/img/cwl-editor-layout.png",
     techStack: ["React 19", "TypeScript", "ReactFlow", "Redux Toolkit", "Jest", "YAML"],
     metrics: "~3,100 lines parser · TAM 5.02/7 · 100% round-trip fidelity · 0 structural runtime errors",
     links: {
@@ -77,6 +80,7 @@ export const projects: Project[] = [
     status: "live",
     statusLabel: "● LIVE — Embedded Shopify App (Production + Staging)",
     hook: "Shopify store optimization platform embedded in the Shopify admin — an AI agent orchestrator reads live store data through the Admin API and executes changes (pricing, inventory, product content) behind tier-gated human-approval guardrails. Cookieless token-exchange auth: the store itself is the identity.",
+    image: "/img/shopi-pulse-main-dashboard.png",
     techStack: ["NestJS", "Next.js", "App Bridge", "Prisma", "PostgreSQL", "Redis", "Turborepo", "Shopify API", "Claude / OpenRouter"],
     metrics: "embedded App Bridge v4 · 31 AI agent tools · native Shopify billing tiers · SSE streaming agent loop",
     links: {
