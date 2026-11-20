@@ -4,12 +4,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Qwen3 Inference Engine — Francesco Sardo",
   description:
-    "From-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS — mmap loading, BPE tokenizer, CPU forward pass, MoE routing, and an OpenAI-compatible HTTP server, with a Metal backend in progress.",
+    "From-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS — mmap loading, BPE tokenizer, CPU and Metal forward pass, MoE routing, OpenAI-compatible HTTP server, and a complete imatrix calibration pipeline for activation-aware quantisation.",
 };
 
 const METRICS = [
   { value: "2", label: "Model Architectures" },
-  { value: "~8.7k", label: "Lines of C" },
+  { value: "~10k", label: "Lines of C" },
   { value: "151,936", label: "Vocabulary Size" },
   { value: "0", label: "Runtime Dependencies" },
 ];
@@ -32,7 +32,7 @@ export default function InferenceEnginePage() {
       title="Qwen3 Inference Engine"
       statusLabel="● EXPERIMENTAL — Local C + Metal inference engine"
       statusColor="text-amber-400 border-amber-400/30"
-      tagline="A from-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS. It loads quantized weights with mmap, tokenizes with the model's own BPE vocab, runs the full transformer forward pass on the CPU, routes MoE tokens through 128 experts, and exposes an OpenAI-compatible HTTP API. The Metal backend is being built from the context layer upward."
+      tagline="A from-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS. It loads quantized weights with mmap, tokenizes with the model's own BPE vocab, runs the full transformer forward pass on the CPU or GPU, routes MoE tokens through 128 experts, exposes an OpenAI-compatible HTTP API, and collects importance matrices for activation-aware quantisation."
       techStack={["C", "Metal", "GGUF", "Qwen3", "GQA / MoE", "POSIX HTTP"]}
       metrics={METRICS}
       images={[]}
@@ -97,7 +97,11 @@ export default function InferenceEnginePage() {
             ],
             [
               "Metal backend context",
-              "Creates the device and command queue, compiles the .metal sources into one library, caches compute pipelines, wraps the GGUF mmap as no-copy MTLBuffers, and allocates KV-cache and activation buffers. Kernel dispatch is the next layer: RMSNorm, RoPE, attention, quantized matmul, SwiGLU, and MoE.",
+              "Creates the device and command queue, compiles the .metal sources into one library, caches compute pipelines, wraps the GGUF mmap as no-copy MTLBuffers, and allocates KV-cache and activation buffers. Kernel dispatch covers RMSNorm, RoPE, attention, quantized matmul, SwiGLU, and MoE routing — validated with end-to-end imatrix collection.",
+            ],
+            [
+              "Imatrix Calibration Pipeline",
+              "Generates a deterministic ChatML calibration corpus from project source, general tasks, translations, and benchmarks (241 prompts, ~102K tokens). A standalone collector hooks into the MoE forward pass on both CPU and Metal backends, accumulates per-expert activation squared sums for gate/up/down tensors, and writes the legacy llama.cpp .dat format for downstream quantisation tools (e.g. deepseek4-quantize). Validated on Qwen3-30B-A3B (579,840 expert-call records).",
             ],
           ].map(([title, desc]) => (
             <div key={title as string} className="flex gap-3">
@@ -142,8 +146,9 @@ export default function InferenceEnginePage() {
             <span className="text-blue-400">HTTP / SSE</span>
           </div>
           <div className="mt-3 text-zinc-600">
-            CPU path implemented end to end; Metal path currently covers device, shader library,
-            pipeline cache, no-copy weight buffers, KV cache and activation buffers
+            CPU path implemented end to end; Metal path covers device, shader library, pipeline cache,
+            no-copy weight buffers, KV cache and activation buffers — validated with end-to-end imatrix
+            collection on a 30B MoE model.
           </div>
         </div>
       </section>
@@ -258,11 +263,12 @@ export default function InferenceEnginePage() {
       <section>
         <h2 className="font-mono text-base text-zinc-200 mb-3">{"// Current Limits & Next"}</h2>
         <p>
-          Generation currently runs on the CPU; the Metal path is a complete context and buffer
-          layer with kernels still to come. The next milestones are the GPU kernels (RMSNorm,
-          QK-Norm, RoPE, GQA flash attention, quantized matmul, SwiGLU, MoE routing), followed by
-          graph execution for decode and chunked prefill, and a CPU-vs-GPU logits parity suite. The
-          CLI frontend is also intentionally thin while the engine API settles.
+          Generation runs on both CPU and Metal GPU; all forward-pass kernels (RMSNorm, QK-Norm, RoPE,
+          GQA flash attention, quantized matmul, SwiGLU, MoE routing) are dispatched on the GPU.
+          The imatrix calibration pipeline is complete: a 241-prompt dataset, a CPU/Metal collector,
+          and a .dat writer that feeds quantisation tools like deepseek4-quantize. Next milestones
+          include adding CPU-vs-GPU logits parity tests, chunked prefill on the GPU, and optimising
+          the forward pass for larger-context streaming.
         </p>
       </section>
 

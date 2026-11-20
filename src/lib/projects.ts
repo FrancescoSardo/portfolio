@@ -108,9 +108,9 @@ export const projects: Project[] = [
     isNew: true,
     status: "experimental",
     statusLabel: "● EXPERIMENTAL — Local C + Metal inference engine",
-    hook: "From-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS — mmap weight loading, BPE tokenizer, RMSNorm/QK-Norm/RoPE/GQA/SwiGLU CPU forward pass, 128-expert top-8 routing, and an OpenAI-compatible HTTP server. Mainly inspired by antirez's DS4. Metal backend context in progress: device, shader pipeline cache, no-copy weight buffers, KV and activation allocation.",
+    hook: "From-scratch GGUF inference engine in C for Qwen3 dense and MoE models on macOS — mmap weight loading, BPE tokenizer, RMSNorm/QK-Norm/RoPE/GQA/SwiGLU CPU and Metal forward pass, 128-expert top-8 routing, OpenAI-compatible HTTP server, and a complete imatrix calibration pipeline for activation-aware quantisation. Mainly inspired by antirez's DS4.",
     techStack: ["C", "Metal", "GGUF", "Qwen3", "GQA / MoE", "POSIX HTTP"],
-    metrics: "2 architectures · ~8.7k LOC · 151,936-token vocab · CPU baseline: 0.55 tok/s prefill / 0.68 tok/s decode · OpenAI-compatible API · Metal context scaffolded",
+    metrics: "2 architectures · ~10k LOC · 151,936-token vocab · Metal GPU: 0.31 tok/s (30B Q8_0) · 241-prompt imatrix dataset · Imatrix collector validated on 30B model · OpenAI-compatible API",
     links: {
       caseStudy: "/projects/inference-engine",
     },
